@@ -1,0 +1,7 @@
+  .pagination a {
+    border: 1px solid #ddd; /* Gray */
+    color: black;
+    float: left;
+    padding: 7px 14px;
+    text-decoration: none;
+  }
