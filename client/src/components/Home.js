@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { Table } from 'react-bootstrap';
+import { Table,Image } from 'react-bootstrap';
 import Pagination from "react-js-pagination";
 import { css } from '@emotion/core';
 import ClipLoader from "react-spinners/ClipLoader";
 import './home.css';
+import imagee from '../images/cat.gif'
 const axios = require('axios');
 const override = css`
   display: block;
   margin: 0 auto;
-  border-color: red;
 `;
 export class Home extends Component {
     constructor(props) {
@@ -37,8 +37,6 @@ export class Home extends Component {
     }
     async componentDidMount() {
         let ques = await this.getData(1);
-        console.log(ques.totalDocs);
-        console.log(ques.limit);
         this.setState({
             data: ques.docs,
             totalItemsCount: ques.totalDocs,
@@ -57,14 +55,13 @@ export class Home extends Component {
             loading: true
         })
         let ques = await this.getData(pageNumber);
-        console.log(ques.page);
         this.setState({
             data: ques.docs,
             totalItemsCount: ques.totalDocs,
             itemsCountPerPage: ques.limit,
+            activePage: pageNumber,
             loading: false
         })
-        this.setState({ activePage: pageNumber });
         console.log(`active page is ${pageNumber}`);
     }
     logout = () => {
@@ -117,12 +114,14 @@ export class Home extends Component {
                         />
                     </>
                     :
-                    <ClipLoader
-                        css={override}
-                        size={150}
-                        color={"#123abc"}
-                        loading={this.state.loading}
-                    />
+                    <>
+                        <Image src={imagee} thumbnail />
+                        <ClipLoader
+                            css={override}
+                            size={0}
+                            loading={this.state.loading}
+                        />
+                    </>
                 }
             </div>
         )

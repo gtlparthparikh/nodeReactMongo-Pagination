@@ -101,7 +101,9 @@ router.get('/data', (req, res) => {
         limit: 10
     };
     dummyData.paginate({}, options).then((result) => {
-        res.status(200).send(result);
+        setTimeout(function () {
+            res.status(200).send(result);
+        }, 2000)
     }).catch((error) => {
         res.status(500).send(error);
     })
